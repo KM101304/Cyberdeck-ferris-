@@ -14,7 +14,7 @@ Recommended baseline:
 | Upper lid back | PETG | Outer face down |
 | Hinge blocks | PETG-CF or nylon | Stronger and stiffer |
 | Keyboard plates | PETG-CF or 1.5 mm aluminum | PETG works for prototype |
-| Tablet brackets | PETG with TPU/felt pads | Avoid bare hard plastic on tablet |
+| Tablet brackets | PETG with TPU/EVA/Poron pads | Print flat; tune hook overlap on fit test |
 | Cable covers / strap | PETG | Small utility parts |
 
 ## Bambu Lab Slicer Settings
@@ -44,17 +44,17 @@ Recommended baseline:
 | bottom_cover.stl | Outer face down |
 | upper_lid_frame.stl | Screen side up |
 | upper_lid_back.stl | Outer face down |
-| hinge blocks | Broad screw face down or vertical; choose orientation that keeps screw loads across walls |
+| hinge blocks | Broad screw face down; keep barrel relief horizontal and use local supports if needed |
 | keyboard plates | Flat |
-| tablet brackets | Flat |
+| tablet brackets | Flat with hook up; use a small brim if PETG corners lift |
 
 ## Post Processing
 
 1. Deburr every screw hole with a 90 degree countersink by hand.
 2. Heat-set inserts with a temperature controlled iron.
 3. Test M2.5 and M3 screws before final assembly.
-4. Add 1 mm TPU, EVA, felt, or Poron pads wherever printed plastic touches the tablet.
-5. Dry fit hinges before electronics are installed.
+4. Add 0.8-1.0 mm TPU, EVA, felt, or Poron pads wherever printed plastic touches the tablet.
+5. Dry fit hinge barrels in the printed reliefs and cycle the lid slowly before electronics are installed.
 
 ## Export
 

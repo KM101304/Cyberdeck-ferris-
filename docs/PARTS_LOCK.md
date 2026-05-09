@@ -20,8 +20,9 @@ Design clearance in CAD:
 | Interface | Value |
 |---|---:|
 | Tablet recess clearance | +0.7 mm total |
-| Soft pad thickness | 1.0 mm TPU/EVA/felt |
-| Bracket overlap | 2.5 mm nominal |
+| Soft pad thickness | 0.8-1.0 mm TPU/EVA/felt |
+| Bracket overlap | 2.0-2.5 mm nominal |
+| Bracket adjustment slot | 14 x 3.2 mm |
 
 ## Keyboard PCB
 
@@ -83,5 +84,16 @@ Minimum spec:
 | Barrel diameter | 9-10 mm |
 | Barrel length | 28-35 mm |
 | Screws | M3 |
+
+CAD baseline:
+
+| Interface | Value |
+|---|---:|
+| Hinge X centers | +/-88 mm |
+| Modeled barrel | 8.2 mm diameter x 30 mm long |
+| Barrel relief | +0.8 mm clearance |
+| Lower block | 34 x 20 x 14 mm |
+| Upper block | 32 x 17 x 9 mm |
+| Opening hard stop | 122 degrees nominal |
 
 The printed hinge blocks are intentionally still parametric because cheap replacement laptop hinges vary. Match the final screw pattern to the hinge you buy before printing the final lid and hinge blocks.

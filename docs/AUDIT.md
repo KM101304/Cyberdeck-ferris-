@@ -2,7 +2,7 @@
 
 ## Summary
 
-The current prototype is suitable for first-round printed fit testing, with the remaining risk concentrated around final hinge screw pattern and physical cable bend behavior. The tablet, keyboard PCB, controller envelope, and USB breakout board envelopes are now locked to real parts.
+The current prototype is suitable for first-round printed fit testing, with the remaining risk concentrated around final purchased hinge screw pattern and physical USB-C cable bend behavior. The tablet, keyboard PCB, controller envelope, USB breakout board envelopes, hinge barrel envelope, and tablet retention geometry are now represented in the CAD.
 
 ## Fixes Applied
 
@@ -15,18 +15,22 @@ The current prototype is suitable for first-round printed fit testing, with the 
 | Cable routing | Cable intent needed to be visible and testable. | Added simulated keyboard interconnect, battery-to-port, and hinge service-loop cable runs. |
 | Electronics massing | Internal parts were not represented in the assembly. | Added simulated controller, port boards, keyboard PCBs, Choc switches, tablet, keycaps, and hinge hardware. |
 | Website preview | Single STL was hard to inspect. | Split web models into shell, tablet, keycaps, and components with an Internals viewing mode. |
-| Tablet fit | Generic 11-inch tablet left too much bezel/dead space. | Locked Samsung Galaxy Tab A9+ and reduced shell to 286 x 178 mm with 12.5 mm lid thickness. |
+| Tablet fit | Generic 11-inch tablet left too much bezel/dead space. | Locked Samsung Galaxy Tab A9+ and reduced shell to 282 x 176 mm with 11.2 mm lid thickness. |
 | Ports | Rear I/O was only conceptual. | Added USB-C keyboard/service, USB-A accessory/service, USB-C PD input, and power switch cutouts. |
 | PCB readiness | Keyboard PCB was only simulated. | Vendored upstream Sweep v2.2 KiCad files and Gerber ZIP under `hardware/keyboard/Sweep`. |
+| Slimming pass | The first real-parts shell still carried extra dead space in height, hinge spacing, service cover, and bracket layout. | Reduced footprint to 282 x 176 mm, lower shell to 24.8 mm, lid to 11.2 mm, battery bay to 108 x 52 x 13 mm, and moved the keyboard trays forward 2 mm. |
+| Hinge realism | Generic hinge blocks did not prove barrel clearance or leaf seating. | Added 8 mm-class hinge barrel reliefs, shallow metal-leaf pockets, M3 screw holes, coaxial visual barrels, and compact hard stops at the rear spine. |
+| Tablet retention | The prior clips were simple blocks and did not positively capture the tablet. | Replaced them with hooked sliding brackets with 14 x 3.2 mm adjustment slots, 2.0-2.5 mm edge overlap target, and soft-pad relief. |
 
 ## Remaining Prototype Checks
 
 1. Confirm the exact USB-C port location on the physical Galaxy Tab A9+ before final cable-channel tuning.
-2. Match hinge screw pattern to the purchased friction hinge before printing final hinge blocks.
+2. Match hinge screw pattern to the purchased friction hinge before printing final hinge blocks; the model assumes an 8.2 mm barrel and 30 mm barrel length.
 3. Print `fit_coupon.stl` before shell parts and tune heat-set insert hole diameters if needed.
-4. Verify keycap-to-lid closed clearance with real switches, caps, PCB, plate, and gasket stack.
-5. Verify the USB-C service loop does not pinch through ten slow open-close cycles.
-6. Confirm the protected power module can be removed through the bottom service path.
+4. Verify hooked tablet brackets clamp with pad compression but do not press hard plastic directly into the glass or aluminum body.
+5. Verify keycap-to-lid closed clearance with real switches, caps, PCB, plate, and gasket stack.
+6. Verify the USB-C service loop does not pinch through ten slow open-close cycles.
+7. Confirm the protected power module can be removed through the bottom service path.
 
 ## Current Recommendation
 

@@ -35,7 +35,8 @@
 | M3 heat-set inserts, Voron style | 40 |
 | 3 mm alignment pins | 6 |
 | Rubber feet, 8-10 mm | 6 |
-| Compact friction hinges, 0.25-0.45 N-m | 2 |
+| Compact friction hinges, 0.25-0.45 N-m, 8-10 mm barrel, 28-35 mm barrel length | 2 |
+| 0.8-1.0 mm EVA/Poron/TPU pad strips for tablet bracket hooks | 4 |
 
 ## Electronics
 
@@ -48,7 +49,7 @@
 | Seeed Studio XIAO RP2040 | 2 |
 | JST-SH 4-pin cable | 1 |
 | Short right-angle USB-C cable | 1 |
-| Slim protected USB-C PD power bank/module, max 108 x 52 x 11 mm preferred | 1 |
+| Slim protected USB-C PD power bank/module, max 108 x 52 x 10.5 mm preferred | 1 |
 | Adafruit USB Type-C Breakout 4090 | 1 |
 | Adafruit HUSB238 USB-C PD Switchable Breakout 5991 | 1 |
 | USB-A panel/breakout board, max 24 x 18 x 6 mm | 1 |

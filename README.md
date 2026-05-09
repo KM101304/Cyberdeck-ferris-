@@ -8,10 +8,10 @@ This repo contains a parametric OpenSCAD prototype package intended for real 3D 
 
 | Feature | Value |
 |---|---:|
-| Closed footprint | 286 x 178 mm |
-| Lower shell height | 27 mm rear structural height |
-| Upper lid thickness | 12.5 mm |
-| Opening angle target | 120-125 degrees |
+| Closed footprint | 282 x 176 mm |
+| Lower shell height | 24.8 mm rear structural height |
+| Upper lid thickness | 11.2 mm |
+| Opening angle target | 122 degrees nominal, 120-125 degree working range |
 | Tablet envelope | Samsung Galaxy Tab A9+, 257.1 x 168.7 x 6.9 mm |
 | Keyboard | Sweep v2.2 Choc low-profile 34 key |
 | Shell material | PETG |
@@ -46,7 +46,7 @@ hardware/keyboard/Sweep/     Vendored Sweep v2.2 PCB source and gerbers
 | `upper_lid_back` | Ribbed lid back panel |
 | `lower_hinge_block_left/right` | Lower hinge mounts |
 | `upper_hinge_block_left/right` | Upper hinge mounts |
-| `tablet_bracket` | Adjustable tablet retention clip, print 4 |
+| `tablet_bracket` | Hooked sliding tablet retention bracket, print 4 |
 | `keyboard_plate_left/right` | Choc switch plates |
 | `cable_cover_short/long` | Internal cable channel covers |
 | `battery_strap` | Retains internal USB-C PD pack/module |
@@ -130,7 +130,8 @@ Confirm insert fit, hinge hardware spacing, Choc switch fit, and cable clearance
 - Use PETG-CF or nylon for hinge blocks when possible.
 - Use 4 wall loops and 25% gyroid infill for shell parts.
 - Use 40% infill and 5 wall loops for hinge blocks.
-- Add 1 mm TPU, EVA, felt, or Poron pads wherever the tablet contacts printed plastic.
+- Add 0.8-1.0 mm TPU, EVA, felt, or Poron pads wherever the tablet contacts printed plastic.
+- Tune the tablet bracket slots so the hooks overlap the glass/edge by 2.0-2.5 mm after pads are installed.
 - Do not install a raw lithium pack without a protected BMS, fuse, and proper charging board. The intended prototype uses an enclosed slim USB-C PD power bank/module.
 
 ## CAD Iteration
