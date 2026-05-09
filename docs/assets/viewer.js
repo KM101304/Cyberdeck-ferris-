@@ -49,17 +49,17 @@ floor.receiveShadow = true;
 scene.add(floor);
 
 const materials = {
-  warm: new THREE.MeshStandardMaterial({
+  shellWarm: new THREE.MeshStandardMaterial({
     color: 0xb9b6ad,
     roughness: 0.74,
     metalness: 0.04
   }),
-  graphite: new THREE.MeshStandardMaterial({
+  shellGraphite: new THREE.MeshStandardMaterial({
     color: 0x2b2b27,
     roughness: 0.68,
     metalness: 0.08
   }),
-  xray: new THREE.MeshStandardMaterial({
+  shellXray: new THREE.MeshStandardMaterial({
     color: 0xd8cfb8,
     roughness: 0.45,
     metalness: 0.02,
@@ -67,48 +67,101 @@ const materials = {
     opacity: 0.32,
     depthWrite: false
   }),
-  wire: new THREE.MeshStandardMaterial({
+  shellWire: new THREE.MeshStandardMaterial({
     color: 0xd8cfb8,
     roughness: 0.65,
     metalness: 0.02,
     wireframe: true
+  }),
+  tablet: new THREE.MeshStandardMaterial({
+    color: 0x050708,
+    roughness: 0.52,
+    metalness: 0.06
+  }),
+  keycaps: new THREE.MeshStandardMaterial({
+    color: 0xe8dfcc,
+    roughness: 0.82,
+    metalness: 0.01
+  }),
+  components: new THREE.MeshStandardMaterial({
+    color: 0x263d34,
+    roughness: 0.58,
+    metalness: 0.08
+  }),
+  componentsBright: new THREE.MeshStandardMaterial({
+    color: 0x6fb08d,
+    roughness: 0.5,
+    metalness: 0.05
   })
 };
 
-let deckMesh;
+const modelDefs = [
+  { key: 'shell', url: './assets/models/fielddeck_shell.stl', material: materials.shellWarm },
+  { key: 'tablet', url: './assets/models/fielddeck_tablet.stl', material: materials.tablet },
+  { key: 'keycaps', url: './assets/models/fielddeck_keycaps.stl', material: materials.keycaps },
+  { key: 'components', url: './assets/models/fielddeck_components.stl', material: materials.components }
+];
+
+const modelGroup = new THREE.Group();
+scene.add(modelGroup);
+const meshes = {};
+let loadedModels = 0;
 const loader = new STLLoader();
 
-loader.load(
-  './assets/models/fielddeck_assembly.stl',
-  (geometry) => {
+for (const def of modelDefs) {
+  loader.load(def.url, (geometry) => {
     geometry.computeVertexNormals();
-    geometry.center();
 
-    deckMesh = new THREE.Mesh(geometry, materials.warm);
-    deckMesh.rotation.x = -Math.PI / 2;
-    deckMesh.castShadow = true;
-    deckMesh.receiveShadow = true;
+    const mesh = new THREE.Mesh(geometry, def.material);
+    mesh.rotation.x = -Math.PI / 2;
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    mesh.userData.key = def.key;
+    meshes[def.key] = mesh;
+    modelGroup.add(mesh);
 
-    const box = new THREE.Box3().setFromObject(deckMesh);
-    const center = box.getCenter(new THREE.Vector3());
-    deckMesh.position.sub(center);
-
-    scene.add(deckMesh);
-    controls.target.set(0, 0, 35);
-    controls.update();
-    loading.classList.add('is-hidden');
-    resize();
-  },
-  undefined,
-  (error) => {
+    loadedModels += 1;
+    if (loadedModels === modelDefs.length) {
+      centerModel();
+      setMode('warm');
+      loading.classList.add('is-hidden');
+      resize();
+    }
+  }, undefined, (error) => {
     loading.textContent = '3D model failed to load.';
     console.error(error);
-  }
-);
+  });
+}
+
+function centerModel() {
+  const box = new THREE.Box3().setFromObject(modelGroup);
+  const center = box.getCenter(new THREE.Vector3());
+  modelGroup.position.sub(center);
+  controls.target.set(0, 0, 35);
+  controls.update();
+}
 
 function setMode(mode) {
-  if (!deckMesh || !materials[mode]) return;
-  deckMesh.material = materials[mode];
+  if (!meshes.shell) return;
+
+  meshes.components.visible = mode === 'internals' || mode === 'xray' || mode === 'wire';
+  meshes.tablet.visible = true;
+  meshes.keycaps.visible = true;
+
+  if (mode === 'warm') {
+    meshes.shell.material = materials.shellWarm;
+    meshes.components.visible = false;
+  } else if (mode === 'graphite') {
+    meshes.shell.material = materials.shellGraphite;
+    meshes.components.visible = false;
+  } else if (mode === 'internals') {
+    meshes.shell.material = materials.shellXray;
+    meshes.components.material = materials.componentsBright;
+  } else if (mode === 'wire') {
+    meshes.shell.material = materials.shellWire;
+    meshes.components.material = materials.componentsBright;
+  }
+
   document.querySelectorAll('.mode-button').forEach((button) => {
     button.classList.toggle('is-active', button.dataset.mode === mode);
   });

@@ -24,10 +24,12 @@ This repo contains a parametric OpenSCAD prototype package intended for real 3D 
 scad/fielddeck.scad          Main parametric source
 scad/parts/*.scad            One wrapper per printable part
 scripts/export_stls.sh       Batch STL export script
+scripts/export_web_models.sh Batch website model export script
 exports/stl/                 STL output directory
 docs/PRINTING.md             Bambu/PETG print settings
 docs/BOM.md                  Hardware, fasteners, and electronics
 docs/ASSEMBLY.md             Build sequence and validation checks
+docs/AUDIT.md                Engineering audit and remaining prototype checks
 ```
 
 ## Printable Parts
@@ -47,6 +49,22 @@ docs/ASSEMBLY.md             Build sequence and validation checks
 | `cable_cover_short/long` | Internal cable channel covers |
 | `battery_strap` | Retains internal USB-C PD pack/module |
 | `fit_coupon` | Insert, screw, slot, and bracket clearance test |
+
+## Simulated Components
+
+The assembly preview and web viewer include simulated internal components:
+
+- 11-inch tablet massing
+- split keyboard PCBs
+- Kailh Choc switch bodies
+- keycaps
+- controller board
+- USB-C port boards
+- protected battery module
+- hinge hardware
+- keyboard, battery, and hinge-loop cable runs
+
+The GitHub Pages viewer has an `Internals` mode that makes the shell transparent so those simulated components can be inspected.
 
 ## Export STLs
 
@@ -120,4 +138,4 @@ The OpenSCAD package is the printable mechanical baseline. For Fusion 360 refine
 
 ## Current Status
 
-The repo now contains both the parametric OpenSCAD source and generated STL files in `exports/stl/`. The STL export was verified with OpenSCAD CGAL rendering; every exported part reported as a valid simple 3D object.
+The repo now contains both the parametric OpenSCAD source and generated STL files in `exports/stl/`. The STL export was verified with OpenSCAD CGAL rendering; every exported part reported as a valid simple 3D object. See [docs/AUDIT.md](docs/AUDIT.md) for the latest engineering audit.

@@ -174,6 +174,47 @@ h1 {
   line-height: 1.2;
 }
 
+.audit-band {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  gap: 1px;
+  background: var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.audit-band > div,
+.audit-band > ul {
+  margin: 0;
+  background: #151511;
+  padding: clamp(22px, 4vw, 42px);
+}
+
+.audit-band h2 {
+  margin: 0 0 12px;
+  font-size: clamp(22px, 3vw, 34px);
+  letter-spacing: 0;
+}
+
+.audit-band p,
+.audit-band li {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.audit-band p {
+  max-width: 840px;
+  margin: 0;
+}
+
+.audit-band ul {
+  list-style-position: inside;
+}
+
+.audit-band li + li {
+  margin-top: 10px;
+}
+
 .render-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -215,6 +256,7 @@ figcaption {
   }
 
   .spec-band,
+  .audit-band,
   .render-grid {
     grid-template-columns: 1fr;
   }

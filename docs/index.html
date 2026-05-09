@@ -30,7 +30,7 @@
             <div class="button-row" role="group" aria-label="Material modes">
               <button type="button" class="mode-button is-active" data-mode="warm">Warm Grey</button>
               <button type="button" class="mode-button" data-mode="graphite">Graphite</button>
-              <button type="button" class="mode-button" data-mode="xray">X-Ray</button>
+              <button type="button" class="mode-button" data-mode="internals">Internals</button>
               <button type="button" class="mode-button" data-mode="wire">Wire</button>
             </div>
             <div class="button-row" role="group" aria-label="Camera views">
@@ -62,6 +62,19 @@
           <span>Shell</span>
           <strong>PETG, heat-set inserts</strong>
         </div>
+      </section>
+
+      <section class="audit-band" aria-label="Prototype audit summary">
+        <div>
+          <h2>Prototype Audit</h2>
+          <p>The current CAD now includes simulated massing for the tablet, split keyboard PCBs, Choc switches, controller, USB-C port boards, battery module, hinge hardware, and cable routing. The viewer's Internals mode makes those systems visible through the shell.</p>
+        </div>
+        <ul>
+          <li>Keyboard bosses extend to the recessed tray stack-up.</li>
+          <li>Battery cradle rails and strap bosses locate the protected power module.</li>
+          <li>Hinge stops and service-loop routing are represented in the assembly.</li>
+          <li>Fit coupon validates insert holes, screw holes, and bracket slots before large prints.</li>
+        </ul>
       </section>
 
       <section class="render-grid" aria-label="Generated renderings">

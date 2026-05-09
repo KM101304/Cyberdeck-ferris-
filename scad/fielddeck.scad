@@ -11,7 +11,7 @@ selected_part = is_undef(PART) ? "assembly_preview" : PART;
 // upper_lid_frame, upper_lid_back, lower_hinge_block_left, lower_hinge_block_right,
 // upper_hinge_block_left, upper_hinge_block_right, tablet_bracket, keyboard_plate_left,
 // keyboard_plate_right, cable_cover_short, cable_cover_long, battery_strap,
-// fit_coupon
+// fit_coupon, web_shell, web_tablet, web_keycaps, web_components
 
 // ---------- primary dimensions ----------
 deck_w = 292;
@@ -42,6 +42,9 @@ hinge_block_lower = [36, 24, 18];
 hinge_block_upper = [34, 20, 12];
 keyboard_boss_h = lower_h - 4.2 - floor_t + 0.4;
 battery_bay = [120, 64, 17];
+controller_bay = [44, 28, 7];
+pcb_t = 1.6;
+plate_t = 1.6;
 
 insert_m25_hole = 4.0;
 insert_m3_hole = 4.8;
@@ -95,6 +98,20 @@ module screw_access_from_bottom(d=3.5) {
 
 module rib(len=40, t=2, h=8) {
   translate([-len/2,-t/2,0]) cube([len,t,h]);
+}
+
+module cable_run(points, w=4, h=3) {
+  for (i=[0:len(points)-2]) {
+    p0 = points[i];
+    p1 = points[i+1];
+    dx = p1[0] - p0[0];
+    dy = p1[1] - p0[1];
+    len_xy = sqrt(dx*dx + dy*dy);
+    ang = atan2(dy, dx);
+    translate([(p0[0]+p1[0])/2, (p0[1]+p1[1])/2, (p0[2]+p1[2])/2])
+      rotate([0,0,ang])
+        rounded_box([len_xy, w, h], r=w/2);
+  }
 }
 
 module honeycomb_patch(cols=6, rows=4, cell=11, wall=1.2, h=5) {
@@ -390,6 +407,23 @@ module keyboard_plate(side="left") {
   }
 }
 
+module keyboard_pcb(side="left") {
+  mirror_side = side == "left" ? 1 : -1;
+  difference() {
+    rounded_box([104,76,pcb_t], r=4);
+    for (k=left_keys)
+      translate([k[0]*mirror_side,k[1],-eps])
+        rounded_box([13.8,13.8,pcb_t+0.2], r=1.0);
+  }
+}
+
+module choc_switches(side="left") {
+  mirror_side = side == "left" ? 1 : -1;
+  for (k=left_keys)
+    translate([k[0]*mirror_side,k[1],plate_t])
+      rounded_box([14.1,14.1,3.2], r=0.8);
+}
+
 module keycap_set(side="left") {
   mirror_side = side == "left" ? 1 : -1;
   for (k=left_keys)
@@ -404,6 +438,110 @@ module tablet_visual() {
   color("#1e252c")
     translate([0,0,upper_t-0.7])
       rounded_box([tablet_w-12, tablet_h-12, 0.8], r=6);
+}
+
+module simulated_battery() {
+  color("#333739")
+    translate([0,92,floor_t+6.8])
+      rounded_box([112,56,12], r=4);
+  color("#252729")
+    translate([0,92,floor_t+13.1])
+      rounded_box([104,48,1.2], r=3);
+}
+
+module simulated_controller() {
+  color("#1f4d3a")
+    translate([-104,54,floor_t+8])
+      rounded_box(controller_bay, r=2);
+  color("#101112")
+    translate([-104,41,floor_t+10])
+      rounded_box([12,5,3], r=1);
+  color("#d3c49b")
+    for (x=[-119,-112,-96,-89])
+      translate([x,59,floor_t+11])
+        rounded_box([4,4,1.5], r=0.5);
+}
+
+module simulated_port_boards() {
+  color("#1f4d3a") {
+    translate([-114,7,13]) rounded_box([22,8,1.6], r=1);
+    translate([114,7,13]) rounded_box([22,8,1.6], r=1);
+  }
+  color("#b8b8aa") {
+    translate([-114,1.8,13.6]) rounded_box([9,5,3], r=1);
+    translate([114,1.8,13.6]) rounded_box([9,5,3], r=1);
+  }
+}
+
+module simulated_cabling() {
+  color("#101112") {
+    cable_run([[-104,54,floor_t+13],[-64,64,floor_t+13],[-28,92,floor_t+13],[28,92,floor_t+13],[64,64,floor_t+13]], w=3.5, h=3);
+    cable_run([[36,92,floor_t+15],[70,70,floor_t+15],[100,35,floor_t+15],[114,10,floor_t+15]], w=4, h=3.2);
+    cable_run([[0,66,floor_t+15],[0,36,floor_t+16],[0,10,lower_h+2],[0,-12,lower_h+7]], w=4.5, h=3.5);
+  }
+}
+
+module hinge_hardware_visual() {
+  color("#111111")
+    for (x=[-hinge_x, hinge_x])
+      translate([x,0,lower_h+5])
+        rotate([90,0,0]) cylinder(d=10,h=30, center=true);
+  color("#2d2d2b")
+    for (x=[-hinge_x, hinge_x]) {
+      translate([x,13,lower_h+2]) rounded_box([32,8,3], r=1);
+      translate([x,-17,lower_h+2]) rounded_box([32,8,3], r=1);
+    }
+}
+
+module keyboard_visual(side="left", include_keycaps=true) {
+  sx = side == "left" ? -68 : 68;
+  rot = side == "left" ? -keyboard_splay : keyboard_splay;
+  translate([sx,94,lower_h-6.4])
+    rotate([0,0,rot]) {
+      color("#1f4d3a") translate([0,0,-1.8]) keyboard_pcb(side);
+      color("#2a2a28") choc_switches(side);
+      color("#eeeeee") translate([0,0,3.2]) keyboard_plate(side);
+      if (include_keycaps)
+        color("#e8dfcc") translate([0,0,3.2]) keycap_set(side);
+    }
+}
+
+module shell_visual() {
+  color("#b9b6ad") lower_part("left");
+  color("#b9b6ad") lower_part("right");
+  color("#8d8a82") translate([0,0,-4]) lower_center_spine();
+  color("#222222") translate([0,0,-5]) bottom_cover();
+
+  translate([0,2,lower_h+7])
+    rotate([122,0,0])
+      translate([0,94,-7]) {
+        color("#b9b6ad") lid_frame();
+        color("#777777") translate([0,0,-3.2]) lid_back();
+      }
+}
+
+module tablet_assembly_visual() {
+  translate([0,2,lower_h+7])
+    rotate([122,0,0])
+      translate([0,94,-7]) {
+        tablet_visual();
+        tablet_brackets_visual();
+      }
+}
+
+module keycaps_assembly_visual() {
+  keyboard_visual("left", true);
+  keyboard_visual("right", true);
+}
+
+module components_visual() {
+  hinge_hardware_visual();
+  simulated_battery();
+  simulated_controller();
+  simulated_port_boards();
+  simulated_cabling();
+  keyboard_visual("left", false);
+  keyboard_visual("right", false);
 }
 
 module cable_cover(len=60) {
@@ -437,35 +575,10 @@ module fit_coupon() {
 }
 
 module assembly_preview() {
-  open_a = 122;
-  color("#b9b6ad") lower_part("left");
-  color("#b9b6ad") lower_part("right");
-  color("#8d8a82") translate([0,0,-4]) lower_center_spine();
-  color("#222222") translate([0,0,-5]) bottom_cover();
-
-  color("#343434")
-    for (x=[-hinge_x, hinge_x])
-      translate([x,0,lower_h+5])
-        rotate([90,0,0]) cylinder(d=10,h=30, center=true);
-
-  // Lid rotates around a virtual hinge line at the rear of the lower shell.
-  translate([0,2,lower_h+7])
-    rotate([open_a,0,0])
-      translate([0,94,-7]) {
-        color("#b9b6ad") lid_frame();
-        color("#777777") translate([0,0,-3.2]) lid_back();
-        tablet_visual();
-        tablet_brackets_visual();
-      }
-
-  translate([-68,94,lower_h-3]) rotate([0,0,-keyboard_splay]) {
-    color("#eeeeee") keyboard_plate("left");
-    color("#e8dfcc") keycap_set("left");
-  }
-  translate([68,94,lower_h-3]) rotate([0,0,keyboard_splay]) {
-    color("#eeeeee") keyboard_plate("right");
-    color("#e8dfcc") keycap_set("right");
-  }
+  shell_visual();
+  components_visual();
+  tablet_assembly_visual();
+  keycaps_assembly_visual();
 }
 
 if (selected_part == "assembly_preview") assembly_preview();
@@ -486,3 +599,7 @@ else if (selected_part == "cable_cover_short") cable_cover(45);
 else if (selected_part == "cable_cover_long") cable_cover(84);
 else if (selected_part == "battery_strap") battery_strap();
 else if (selected_part == "fit_coupon") fit_coupon();
+else if (selected_part == "web_shell") shell_visual();
+else if (selected_part == "web_tablet") tablet_assembly_visual();
+else if (selected_part == "web_keycaps") keycaps_assembly_visual();
+else if (selected_part == "web_components") components_visual();

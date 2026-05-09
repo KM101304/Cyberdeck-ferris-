@@ -3191,6 +3191,20 @@ solid OpenSCAD_Model
       vertex 10.85 6.47224 8.98
     endloop
   endfacet
+  facet normal 0.99786 -0.0653877 0
+    outer loop
+      vertex 8.3 5 18
+      vertex 8.31454 5.22189 8.98
+      vertex 8.31454 5.22189 18
+    endloop
+  endfacet
+  facet normal 0.99786 -0.0653877 0
+    outer loop
+      vertex 8.31454 5.22189 8.98
+      vertex 8.3 5 18
+      vertex 8.3 5 8.98
+    endloop
+  endfacet
   facet normal 0.659342 0.751844 -0
     outer loop
       vertex 8.96511 3.6513 8.98
@@ -3863,6 +3877,20 @@ solid OpenSCAD_Model
       vertex 8.96511 3.6513 8.98
     endloop
   endfacet
+  facet normal 0.0653848 0.99786 -0
+    outer loop
+      vertex 10 3.3 8.98
+      vertex 9.7781 3.31454 18
+      vertex 10 3.3 18
+    endloop
+  endfacet
+  facet normal 0.0653848 0.99786 0
+    outer loop
+      vertex 9.7781 3.31454 18
+      vertex 10 3.3 8.98
+      vertex 9.7781 3.31454 8.98
+    endloop
+  endfacet
   facet normal 0.19513 0.980777 -0
     outer loop
       vertex 9.7781 3.31454 8.98
@@ -3891,20 +3919,6 @@ solid OpenSCAD_Model
       vertex 8.4294 5.65056 8.98
     endloop
   endfacet
-  facet normal 0.0653848 0.99786 -0
-    outer loop
-      vertex 10 3.3 8.98
-      vertex 9.7781 3.31454 18
-      vertex 10 3.3 18
-    endloop
-  endfacet
-  facet normal 0.0653848 0.99786 0
-    outer loop
-      vertex 9.7781 3.31454 18
-      vertex 10 3.3 8.98
-      vertex 9.7781 3.31454 8.98
-    endloop
-  endfacet
   facet normal 0.89686 0.442314 0
     outer loop
       vertex 8.52776 4.15 18
@@ -3917,20 +3931,6 @@ solid OpenSCAD_Model
       vertex 8.4294 4.34944 8.98
       vertex 8.52776 4.15 18
       vertex 8.52776 4.15 8.98
-    endloop
-  endfacet
-  facet normal 0.99786 -0.0653877 0
-    outer loop
-      vertex 8.3 5 18
-      vertex 8.31454 5.22189 8.98
-      vertex 8.31454 5.22189 18
-    endloop
-  endfacet
-  facet normal 0.99786 -0.0653877 0
-    outer loop
-      vertex 8.31454 5.22189 8.98
-      vertex 8.3 5 18
-      vertex 8.3 5 8.98
     endloop
   endfacet
   facet normal 0.980779 -0.195122 0

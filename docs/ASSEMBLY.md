@@ -12,6 +12,8 @@ Print these small parts before the full shell:
 
 Verify heat-set insert holes, switch cutouts, hinge screw spacing, and tablet pad thickness.
 
+Review `AUDIT.md` before printing large parts. The remaining high-risk dimensions are tablet envelope, hinge screw pattern, and cable service-loop bend behavior.
+
 ## Main Assembly
 
 1. Heat-set all M2.5 and M3 inserts.

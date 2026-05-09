@@ -52,3 +52,7 @@
 | USB-C panel mount extension | 1 |
 | 26-28 AWG silicone wire | as needed |
 | 1 mm EVA/Poron/TPU pad sheet | 1 |
+
+## Simulated In CAD
+
+The preview assembly includes non-print reference geometry for the battery module, controller, port boards, cables, switch bodies, keycaps, tablet, and hinge barrels. These are for clearance and rendering context, not final electronics fabrication.
