@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ferris FieldDeck 11</title>
+    <meta name="description" content="Interactive rendering and manufacturing package for the Ferris FieldDeck 11 portable cyberdeck.">
+    <link rel="stylesheet" href="./assets/site.css">
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="viewer-section" aria-label="Interactive 3D design viewer">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Ferris FieldDeck 11</p>
+            <h1>Portable Asymmetrical Cyberdeck</h1>
+          </div>
+          <nav class="links" aria-label="Project links">
+            <a href="https://github.com/KM101304/Cyberdeck-ferris-/tree/main/exports/stl">STLs</a>
+            <a href="./BOM.md">BOM</a>
+            <a href="./PRINTING.md">Print</a>
+            <a href="./ASSEMBLY.md">Assembly</a>
+          </nav>
+        </header>
+
+        <div class="viewer-wrap">
+          <canvas id="fielddeck-viewer" aria-label="Explorable 3D rendering of the Ferris FieldDeck 11"></canvas>
+
+          <div class="hud" aria-label="Viewer controls">
+            <div class="button-row" role="group" aria-label="Material modes">
+              <button type="button" class="mode-button is-active" data-mode="warm">Warm Grey</button>
+              <button type="button" class="mode-button" data-mode="graphite">Graphite</button>
+              <button type="button" class="mode-button" data-mode="xray">X-Ray</button>
+              <button type="button" class="mode-button" data-mode="wire">Wire</button>
+            </div>
+            <div class="button-row" role="group" aria-label="Camera views">
+              <button type="button" class="view-button" data-view="iso">Iso</button>
+              <button type="button" class="view-button" data-view="front">Front</button>
+              <button type="button" class="view-button" data-view="side">Side</button>
+              <button type="button" class="view-button" data-view="top">Top</button>
+            </div>
+          </div>
+
+          <div class="loading" id="loading-state">Loading 3D model...</div>
+        </div>
+      </section>
+
+      <section class="spec-band" aria-label="Design specifications">
+        <div>
+          <span>Footprint</span>
+          <strong>292 x 188 mm</strong>
+        </div>
+        <div>
+          <span>Display</span>
+          <strong>11 in USB-C tablet</strong>
+        </div>
+        <div>
+          <span>Keyboard</span>
+          <strong>36-key Choc split</strong>
+        </div>
+        <div>
+          <span>Shell</span>
+          <strong>PETG, heat-set inserts</strong>
+        </div>
+      </section>
+
+      <section class="render-grid" aria-label="Generated renderings">
+        <figure>
+          <img src="./assets/previews/fielddeck_keyboard_iso.png" alt="Keyboard-side isometric rendering of the cyberdeck">
+          <figcaption>Keyboard-side isometric</figcaption>
+        </figure>
+        <figure>
+          <img src="./assets/previews/fielddeck_keyboard_top.png" alt="Top rendering showing the split ergonomic keyboard layout">
+          <figcaption>Split ergonomic layout</figcaption>
+        </figure>
+        <figure>
+          <img src="./assets/previews/fielddeck_open_side.png" alt="Side rendering showing the clamshell opening angle">
+          <figcaption>Clamshell side profile</figcaption>
+        </figure>
+      </section>
+    </main>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="./assets/viewer.js"></script>
+  </body>
+</html>
