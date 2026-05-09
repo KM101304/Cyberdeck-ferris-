@@ -8,12 +8,12 @@ This repo contains a parametric OpenSCAD prototype package intended for real 3D 
 
 | Feature | Value |
 |---|---:|
-| Closed footprint | 292 x 188 mm |
-| Lower shell height | 31 mm rear structural height |
-| Upper lid thickness | 15 mm |
+| Closed footprint | 286 x 178 mm |
+| Lower shell height | 27 mm rear structural height |
+| Upper lid thickness | 12.5 mm |
 | Opening angle target | 120-125 degrees |
-| Tablet envelope | 250 x 178 x 7.5 mm |
-| Keyboard | Choc low-profile, Ferris/Sweep-inspired 36 key |
+| Tablet envelope | Samsung Galaxy Tab A9+, 257.1 x 168.7 x 6.9 mm |
+| Keyboard | Sweep v2.2 Choc low-profile 34 key |
 | Shell material | PETG |
 | Structural inserts | M2.5 and M3 brass heat-set inserts |
 | Hinge style | Dual compact friction hinges |
@@ -30,6 +30,8 @@ docs/PRINTING.md             Bambu/PETG print settings
 docs/BOM.md                  Hardware, fasteners, and electronics
 docs/ASSEMBLY.md             Build sequence and validation checks
 docs/AUDIT.md                Engineering audit and remaining prototype checks
+docs/PARTS_LOCK.md           Real selected parts and mechanical envelopes
+hardware/keyboard/Sweep/     Vendored Sweep v2.2 PCB source and gerbers
 ```
 
 ## Printable Parts
@@ -65,6 +67,10 @@ The assembly preview and web viewer include simulated internal components:
 - keyboard, battery, and hinge-loop cable runs
 
 The GitHub Pages viewer has an `Internals` mode that makes the shell transparent so those simulated components can be inspected.
+
+## Real Parts Locked
+
+This revision is built around a Samsung Galaxy Tab A9+ Wi-Fi tablet and a Sweep v2.2 Choc PCB. See [docs/PARTS_LOCK.md](docs/PARTS_LOCK.md) for selected parts, dimensions, and source links.
 
 ## Export STLs
 

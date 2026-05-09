@@ -2,7 +2,7 @@
 
 ## Summary
 
-The current prototype is suitable for first-round printed fit testing, with the remaining risk concentrated around real hinge hardware selection, real tablet dimensions, and physical cable bend behavior.
+The current prototype is suitable for first-round printed fit testing, with the remaining risk concentrated around final hinge screw pattern and physical cable bend behavior. The tablet, keyboard PCB, controller envelope, and USB breakout board envelopes are now locked to real parts.
 
 ## Fixes Applied
 
@@ -15,10 +15,13 @@ The current prototype is suitable for first-round printed fit testing, with the 
 | Cable routing | Cable intent needed to be visible and testable. | Added simulated keyboard interconnect, battery-to-port, and hinge service-loop cable runs. |
 | Electronics massing | Internal parts were not represented in the assembly. | Added simulated controller, port boards, keyboard PCBs, Choc switches, tablet, keycaps, and hinge hardware. |
 | Website preview | Single STL was hard to inspect. | Split web models into shell, tablet, keycaps, and components with an Internals viewing mode. |
+| Tablet fit | Generic 11-inch tablet left too much bezel/dead space. | Locked Samsung Galaxy Tab A9+ and reduced shell to 286 x 178 mm with 12.5 mm lid thickness. |
+| Ports | Rear I/O was only conceptual. | Added USB-C keyboard/service, USB-A accessory/service, USB-C PD input, and power switch cutouts. |
+| PCB readiness | Keyboard PCB was only simulated. | Vendored upstream Sweep v2.2 KiCad files and Gerber ZIP under `hardware/keyboard/Sweep`. |
 
 ## Remaining Prototype Checks
 
-1. Confirm the exact 11-inch tablet envelope and USB-C port location.
+1. Confirm the exact USB-C port location on the physical Galaxy Tab A9+ before final cable-channel tuning.
 2. Match hinge screw pattern to the purchased friction hinge before printing final hinge blocks.
 3. Print `fit_coupon.stl` before shell parts and tune heat-set insert hole diameters if needed.
 4. Verify keycap-to-lid closed clearance with real switches, caps, PCB, plate, and gasket stack.

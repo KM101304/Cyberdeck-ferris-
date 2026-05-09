@@ -41,15 +41,17 @@
 
 | Item | Qty |
 |---|---:|
-| 11-inch USB-C tablet | 1 |
-| Kailh Choc v1 switches | 36 |
-| Choc keycaps | 36 |
-| Ferris Sweep compatible PCB pair | 1 |
-| RP2040 Pro Micro, XIAO RP2040, or nice!nano | 1-2 |
+| Samsung Galaxy Tab A9+ Wi-Fi 64 GB SM-X210 | 1 |
+| Kailh Choc v1 switches | 34 |
+| Choc keycaps | 34 |
+| Sweep v2.2 low-profile PCB pair | 1 |
+| Seeed Studio XIAO RP2040 | 2 |
 | JST-SH 4-pin cable | 1 |
 | Short right-angle USB-C cable | 1 |
-| USB-C PD power bank or protected module | 1 |
-| USB-C panel mount extension | 1 |
+| Slim protected USB-C PD power bank/module, max 108 x 52 x 11 mm preferred | 1 |
+| Adafruit USB Type-C Breakout 4090 | 1 |
+| Adafruit HUSB238 USB-C PD Switchable Breakout 5991 | 1 |
+| USB-A panel/breakout board, max 24 x 18 x 6 mm | 1 |
 | 26-28 AWG silicone wire | as needed |
 | 1 mm EVA/Poron/TPU pad sheet | 1 |
 

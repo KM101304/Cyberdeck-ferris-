@@ -14,35 +14,39 @@ selected_part = is_undef(PART) ? "assembly_preview" : PART;
 // fit_coupon, web_shell, web_tablet, web_keycaps, web_components
 
 // ---------- primary dimensions ----------
-deck_w = 292;
-deck_d = 188;
-lower_h = 31;
-front_h_visual = 20;
-upper_w = 292;
-upper_h = 188;
-upper_t = 15;
+deck_w = 286;
+deck_d = 178;
+lower_h = 27;
+front_h_visual = 17;
+upper_w = 286;
+upper_h = 178;
+upper_t = 12.5;
 wall = 3.0;
 floor_t = 2.8;
 rib_t = 2.0;
 rib_h = 9;
 
-tablet_w = 250;
-tablet_h = 178;
-tablet_t = 7.5;
-tablet_clear = 0.8;
+// Locked tablet: Samsung Galaxy Tab A9+ Wi-Fi, SM-X210.
+tablet_w = 257.1;
+tablet_h = 168.7;
+tablet_t = 6.9;
+tablet_clear = 0.7;
 
-keyboard_splay = 12;
+keyboard_splay = 11;
 keyboard_tent = 4;
 key_pitch_x = 18;
 key_pitch_y = 17;
 
 hinge_x = 92;
 hinge_y = 0;
-hinge_block_lower = [36, 24, 18];
-hinge_block_upper = [34, 20, 12];
+hinge_block_lower = [34, 22, 16];
+hinge_block_upper = [32, 18, 10];
 keyboard_boss_h = lower_h - 4.2 - floor_t + 0.4;
-battery_bay = [120, 64, 17];
-controller_bay = [44, 28, 7];
+battery_bay = [116, 58, 15];
+controller_bay = [22, 18, 4.5];
+usb_c_breakout = [20.4, 14.2, 5.0];
+pd_breakout = [29.1, 20.3, 10.1];
+usb_a_board = [24, 18, 6];
 pcb_t = 1.6;
 plate_t = 1.6;
 
@@ -54,8 +58,8 @@ boss_m3_od = 8.0;
 eps = 0.02;
 
 lower_pts = [
-  [-146,0], [146,0], [146,146], [116,174], [32,188],
-  [0,176], [-36,188], [-126,176], [-146,150]
+  [-143,0], [143,0], [143,138], [116,164], [34,178],
+  [0,168], [-38,178], [-116,164], [-143,140]
 ];
 
 // ---------- utility geometry ----------
@@ -142,34 +146,35 @@ module lower_inner_void() {
 }
 
 module keyboard_pocket(side="left") {
-  sx = side == "left" ? -68 : 68;
+  sx = side == "left" ? -66 : 66;
   rot = side == "left" ? -keyboard_splay : keyboard_splay;
-  translate([sx,94,lower_h-4.2])
+  translate([sx,86,lower_h-4.2])
     rotate([0,0,rot])
-      rounded_box([116,88,5], r=5);
+      rounded_box([110,82,5], r=5);
 }
 
 module keyboard_clearance_cut(side="left") {
-  sx = side == "left" ? -68 : 68;
+  sx = side == "left" ? -66 : 66;
   rot = side == "left" ? -keyboard_splay : keyboard_splay;
-  translate([sx,94,lower_h-9.0])
+  translate([sx,86,lower_h-9.0])
     rotate([0,0,rot])
-      rounded_box([104,76,7], r=4);
+      rounded_box([100,72,7], r=4);
 }
 
 module lower_port_cuts() {
   // Rear face utility ports.
-  translate([-114,-eps,12]) rotate([90,0,0]) rounded_slot(10,4.5,5);
-  translate([114,-eps,12]) rotate([90,0,0]) rounded_slot(10,4.5,5);
-  translate([128,-eps,20]) rotate([90,0,0]) rounded_slot(12,5,5);
+  translate([-106,-eps,11]) rotate([90,0,0]) rounded_slot(10,4.5,5); // keyboard USB-C
+  translate([106,-eps,11]) rotate([90,0,0]) rounded_slot(10,4.5,5);  // PD/charge USB-C
+  translate([0,-eps,11.5]) rotate([90,0,0]) rounded_slot(15,7,5);    // USB-A accessory
+  translate([130,-eps,19]) rotate([90,0,0]) rounded_slot(12,5,5);    // power switch
 }
 
 module lower_vent_cuts() {
   for (i=[0:7])
-    translate([-102 + i*6,-eps,23])
+    translate([-102 + i*6,-eps,21])
       rotate([90,0,0]) rounded_slot(18,2,5);
   for (i=[0:9])
-    translate([52 + i*6,-eps,23])
+    translate([52 + i*6,-eps,21])
       rotate([90,0,0]) rounded_slot(22,2,5);
 }
 
@@ -188,51 +193,51 @@ module lower_shell_unsplit() {
       }
 
       // Rear hinge spine, proud and reinforced.
-      translate([0,9,lower_h-1])
-        rounded_box([260,18,8], r=3);
+      translate([0,8,lower_h-1])
+        rounded_box([252,16,7], r=3);
 
       // Hinge mounting blocks.
       for (x=[-hinge_x, hinge_x])
-        translate([x,12,floor_t-0.2])
+        translate([x,11,floor_t-0.2])
           rounded_box(hinge_block_lower, r=3);
 
       // Printed hard stops keep the lid from rotating past the target opening angle.
       for (x=[-hinge_x, hinge_x])
-        translate([x,29,lower_h+1])
+        translate([x,26,lower_h+1])
           rotate([0,0,0])
             rounded_box([28,7,9], r=2);
 
       // Keyboard screw bosses, 4 per side.
       for (side=[-1,1]) {
-        sx = side < 0 ? -68 : 68;
+        sx = side < 0 ? -66 : 66;
         rot = side < 0 ? -keyboard_splay : keyboard_splay;
         for (p=[[-46,-32],[46,-32],[-46,32],[46,32]])
-          translate([sx,94,0])
+          translate([sx,86,0])
             rotate([0,0,rot])
               translate([p[0],p[1],floor_t-0.2])
                 heatset_boss(boss_m25_od, insert_m25_hole, keyboard_boss_h);
       }
 
       // Bottom cover bosses around perimeter and battery bay.
-      for (p=[[-126,22],[-52,28],[52,28],[126,22],[-128,142],[-58,166],[58,166],[128,142],[0,152],[0,44]])
+      for (p=[[-123,22],[-52,28],[52,28],[123,22],[-124,136],[-58,156],[58,156],[124,136],[0,146],[0,42]])
         translate([p[0],p[1],floor_t-0.2])
           heatset_boss(boss_m3_od, insert_m3_hole, 8.2);
 
       // Ribs tying hinge spine and keyboard trays into floor.
       for (x=[-124,-96,-64,-32,32,64,96,124])
-        translate([x,31,floor_t-0.2])
-          rotate([0,0,90]) rib(len=48, t=rib_t, h=rib_h);
+        translate([x,29,floor_t-0.2])
+          rotate([0,0,90]) rib(len=44, t=rib_t, h=rib_h);
 
       for (x=[-98,-74,-50,50,74,98])
-        translate([x,102,floor_t-0.2])
-          rotate([0,0,0]) rib(len=44, t=rib_t, h=7);
+        translate([x,94,floor_t-0.2])
+          rotate([0,0,0]) rib(len=40, t=rib_t, h=7);
 
       // Honeycomb fields under palm/battery zones.
-      translate([-74,145,floor_t-0.2]) honeycomb_patch(5,3,11,1.2,5.2);
-      translate([74,145,floor_t-0.2]) honeycomb_patch(5,3,11,1.2,5.2);
+      translate([-70,136,floor_t-0.2]) honeycomb_patch(5,3,11,1.2,5.2);
+      translate([70,136,floor_t-0.2]) honeycomb_patch(5,3,11,1.2,5.2);
 
       // Battery cradle rails for a slim protected USB-C PD pack/module.
-      translate([0,92,floor_t-0.2]) {
+      translate([0,84,floor_t-0.2]) {
         translate([-battery_bay[0]/2,-battery_bay[1]/2,0])
           cube([battery_bay[0],3,6]);
         translate([-battery_bay[0]/2,battery_bay[1]/2-3,0])
@@ -245,28 +250,33 @@ module lower_shell_unsplit() {
 
       // Snap/strap bosses over the battery bay.
       for (x=[-54,54])
-        translate([x,92,floor_t-0.2])
+        translate([x,84,floor_t-0.2])
           heatset_boss(boss_m3_od, insert_m3_hole, 7.2);
+
+      // Real I/O board mounting envelopes tied to rear port cutouts.
+      translate([-106,13,floor_t+5]) rounded_box(usb_c_breakout, r=1.5);
+      translate([106,16,floor_t+6]) rounded_box(pd_breakout, r=1.5);
+      translate([0,14,floor_t+5.5]) rounded_box(usb_a_board, r=1.5);
     }
 
     // Hinge screw holes.
     for (x=[-hinge_x, hinge_x])
       for (p=[[-11,-6],[11,-6],[-11,6],[11,6]])
-        translate([x+p[0],12+p[1],floor_t+9])
+        translate([x+p[0],11+p[1],floor_t+8])
           screw_through(3.4, 20);
 
     // Bottom service cover screw access holes through the lower floor.
-    for (p=[[-126,22],[-52,28],[52,28],[126,22],[-128,142],[-58,166],[58,166],[128,142],[0,152],[0,44]])
+    for (p=[[-123,22],[-52,28],[52,28],[123,22],[-124,136],[-58,156],[58,156],[124,136],[0,146],[0,42]])
       translate([p[0],p[1],0])
         screw_access_from_bottom(3.5);
 
     // Battery strap screw access.
     for (x=[-54,54])
-      translate([x,92,0])
+      translate([x,84,0])
         screw_access_from_bottom(3.5);
 
     // Cable pass-through from battery/controller bay to hinge spine.
-    translate([0,30,floor_t+3])
+    translate([0,28,floor_t+3])
       rounded_box([22,8,8], r=2);
   }
 }
@@ -302,10 +312,10 @@ module bottom_cover() {
   difference() {
     linear_extrude(height=2.8)
       offset(delta=-6) rpoly(lower_pts, r=7);
-    for (p=[[-126,22],[-52,28],[52,28],[126,22],[-128,142],[-58,166],[58,166],[128,142],[0,152],[0,44]])
+    for (p=[[-123,22],[-52,28],[52,28],[123,22],[-124,136],[-58,156],[58,156],[124,136],[0,146],[0,42]])
       translate([p[0],p[1],-eps]) cylinder(d=3.5, h=4);
     for (i=[0:11])
-      translate([42+i*6,118,-eps]) rounded_slot(18,2,4);
+      translate([42+i*6,110,-eps]) rounded_slot(18,2,4);
   }
 }
 
@@ -328,10 +338,10 @@ module lid_frame() {
         rounded_slot(14,3,7);
 
     // USB-C cable exit near right lower edge.
-    translate([136,-58,5]) cube([14,9,7], center=true);
+    translate([132,-54,5]) cube([14,9,7], center=true);
 
     // Hinge-side cable relief loop.
-    translate([0,-91,5]) rounded_slot(22,7,10);
+    translate([0,-86,5]) rounded_slot(22,7,10);
   }
 }
 
@@ -343,14 +353,14 @@ module lid_back() {
       for (x=[-120,-80,-40,0,40,80,120])
         translate([x,0,2.8]) rotate([0,0,90]) rib(len=154,t=1.8,h=5.2);
       for (x=[-hinge_x, hinge_x])
-        translate([x,-79,2.8]) rounded_box(hinge_block_upper, r=3);
+      translate([x,-74,2.8]) rounded_box(hinge_block_upper, r=3);
     }
     for (p=[[-132,-82],[-88,-82],[-44,-82],[0,-82],[44,-82],[88,-82],[132,-82],
             [-132,82],[-88,82],[-44,82],[0,82],[44,82],[88,82],[132,82]])
       translate([p[0],p[1],-eps]) cylinder(d=3.0, h=12);
     for (x=[-hinge_x, hinge_x])
       for (p=[[-10,-5],[10,-5],[-10,5],[10,5]])
-        translate([x+p[0],-79+p[1],3]) screw_through(3.4, 16);
+        translate([x+p[0],-74+p[1],3]) screw_through(3.4, 16);
   }
 }
 
@@ -381,7 +391,7 @@ module tablet_bracket() {
 }
 
 module tablet_brackets_visual() {
-  for (p=[[-116,-70],[116,-70],[-116,70],[116,70]])
+  for (p=[[-124,-66],[124,-66],[-124,66],[124,66]])
     translate([p[0],p[1],upper_t-2])
       color("#d7d1c3") tablet_bracket();
 }
@@ -391,7 +401,7 @@ left_keys = [
   [-36,20],[-18,15],[0,11],[18,15],[36,20],
   [-36,3], [-18,-2],[0,-6],[18,-2],[36,3],
   [-36,-14],[-18,-19],[0,-23],[18,-19],[36,-14],
-  [15,-42],[34,-42],[52,-34]
+  [18,-42],[39,-36]
 ];
 
 module keyboard_plate(side="left") {
@@ -442,42 +452,44 @@ module tablet_visual() {
 
 module simulated_battery() {
   color("#333739")
-    translate([0,92,floor_t+6.8])
-      rounded_box([112,56,12], r=4);
+    translate([0,84,floor_t+6.3])
+      rounded_box([108,52,11], r=4);
   color("#252729")
-    translate([0,92,floor_t+13.1])
-      rounded_box([104,48,1.2], r=3);
+    translate([0,84,floor_t+12.1])
+      rounded_box([100,44,1.2], r=3);
 }
 
 module simulated_controller() {
   color("#1f4d3a")
-    translate([-104,54,floor_t+8])
+    translate([-104,52,floor_t+8])
       rounded_box(controller_bay, r=2);
   color("#101112")
-    translate([-104,41,floor_t+10])
+    translate([-104,42,floor_t+10])
       rounded_box([12,5,3], r=1);
   color("#d3c49b")
     for (x=[-119,-112,-96,-89])
-      translate([x,59,floor_t+11])
+      translate([x,57,floor_t+11])
         rounded_box([4,4,1.5], r=0.5);
 }
 
 module simulated_port_boards() {
   color("#1f4d3a") {
-    translate([-114,7,13]) rounded_box([22,8,1.6], r=1);
-    translate([114,7,13]) rounded_box([22,8,1.6], r=1);
+    translate([-106,10,12]) rounded_box(usb_c_breakout, r=1);
+    translate([106,13,12]) rounded_box(pd_breakout, r=1);
+    translate([0,11,12]) rounded_box(usb_a_board, r=1);
   }
   color("#b8b8aa") {
-    translate([-114,1.8,13.6]) rounded_box([9,5,3], r=1);
-    translate([114,1.8,13.6]) rounded_box([9,5,3], r=1);
+    translate([-106,1.8,13.6]) rounded_box([9,5,3], r=1);
+    translate([106,1.8,13.6]) rounded_box([9,5,3], r=1);
+    translate([0,1.5,13.2]) rounded_box([14,7,5], r=1);
   }
 }
 
 module simulated_cabling() {
   color("#101112") {
-    cable_run([[-104,54,floor_t+13],[-64,64,floor_t+13],[-28,92,floor_t+13],[28,92,floor_t+13],[64,64,floor_t+13]], w=3.5, h=3);
-    cable_run([[36,92,floor_t+15],[70,70,floor_t+15],[100,35,floor_t+15],[114,10,floor_t+15]], w=4, h=3.2);
-    cable_run([[0,66,floor_t+15],[0,36,floor_t+16],[0,10,lower_h+2],[0,-12,lower_h+7]], w=4.5, h=3.5);
+    cable_run([[-104,52,floor_t+13],[-64,60,floor_t+13],[-28,84,floor_t+13],[28,84,floor_t+13],[64,60,floor_t+13]], w=3.5, h=3);
+    cable_run([[36,84,floor_t+14],[70,64,floor_t+14],[100,32,floor_t+14],[106,10,floor_t+14]], w=4, h=3.2);
+    cable_run([[0,62,floor_t+14],[0,34,floor_t+15],[0,10,lower_h+1],[0,-12,lower_h+6]], w=4.5, h=3.5);
   }
 }
 
@@ -485,18 +497,18 @@ module hinge_hardware_visual() {
   color("#111111")
     for (x=[-hinge_x, hinge_x])
       translate([x,0,lower_h+5])
-        rotate([90,0,0]) cylinder(d=10,h=30, center=true);
+        rotate([90,0,0]) cylinder(d=9,h=28, center=true);
   color("#2d2d2b")
     for (x=[-hinge_x, hinge_x]) {
-      translate([x,13,lower_h+2]) rounded_box([32,8,3], r=1);
-      translate([x,-17,lower_h+2]) rounded_box([32,8,3], r=1);
+      translate([x,12,lower_h+2]) rounded_box([30,7,3], r=1);
+      translate([x,-16,lower_h+2]) rounded_box([30,7,3], r=1);
     }
 }
 
 module keyboard_visual(side="left", include_keycaps=true) {
-  sx = side == "left" ? -68 : 68;
+  sx = side == "left" ? -66 : 66;
   rot = side == "left" ? -keyboard_splay : keyboard_splay;
-  translate([sx,94,lower_h-6.4])
+  translate([sx,86,lower_h-6.4])
     rotate([0,0,rot]) {
       color("#1f4d3a") translate([0,0,-1.8]) keyboard_pcb(side);
       color("#2a2a28") choc_switches(side);
@@ -512,18 +524,18 @@ module shell_visual() {
   color("#8d8a82") translate([0,0,-4]) lower_center_spine();
   color("#222222") translate([0,0,-5]) bottom_cover();
 
-  translate([0,2,lower_h+7])
+  translate([0,2,lower_h+6])
     rotate([122,0,0])
-      translate([0,94,-7]) {
+      translate([0,89,-7]) {
         color("#b9b6ad") lid_frame();
         color("#777777") translate([0,0,-3.2]) lid_back();
       }
 }
 
 module tablet_assembly_visual() {
-  translate([0,2,lower_h+7])
+  translate([0,2,lower_h+6])
     rotate([122,0,0])
-      translate([0,94,-7]) {
+      translate([0,89,-7]) {
         tablet_visual();
         tablet_brackets_visual();
       }
