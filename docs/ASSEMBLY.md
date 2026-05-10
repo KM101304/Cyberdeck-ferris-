@@ -22,7 +22,7 @@ Review `AUDIT.md` before printing large parts. The remaining high-risk dimension
 4. Seat the friction hinge leaves into the printed pockets and mount them to the lower hinge blocks.
 5. Install the keyboard plates and PCB assemblies into the recessed trays.
 6. Route the right keyboard cable through the central cable channel.
-7. Install controller hardware behind the left keyboard half.
+7. Install Pro Micro-footprint USB-C RP2040 controller hardware behind the left keyboard half.
 8. Mount the power bank or protected battery module in the central bay.
 9. Route the USB-C tablet power lead to the rear hinge pass-through.
 10. Assemble `upper_lid_frame` and `upper_lid_back`.
@@ -39,6 +39,7 @@ Review `AUDIT.md` before printing large parts. The remaining high-risk dimension
 - Hinge barrels rotate coaxially without rubbing the printed reliefs.
 - USB-C loop does not pinch when closing.
 - Keycaps clear the lid by at least 1.5 mm.
+- Nominal keycap top is at or below 22.6 mm from the lower shell datum.
 - Tablet cannot lift out when shaken lightly but can be removed by loosening only the four bracket screws.
 - Battery can be removed through the bottom cover.
 - No hinge block flex is visible during opening.

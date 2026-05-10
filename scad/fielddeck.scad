@@ -7,7 +7,7 @@ $fn = 48;
 // ---------- part selector ----------
 selected_part = is_undef(PART) ? "assembly_preview" : PART;
 // Valid PART values:
-// assembly_preview, lower_left, lower_right, lower_center_spine, bottom_cover,
+// assembly_preview, closed_preview, lower_left, lower_right, lower_center_spine, bottom_cover,
 // upper_lid_frame, upper_lid_back, lower_hinge_block_left, lower_hinge_block_right,
 // upper_hinge_block_left, upper_hinge_block_right, tablet_bracket, keyboard_plate_left,
 // keyboard_plate_right, cable_cover_short, cable_cover_long, battery_strap,
@@ -36,6 +36,10 @@ keyboard_splay = 11;
 keyboard_tent = 4;
 key_pitch_x = 18;
 key_pitch_y = 17;
+keyboard_mount_z = 13.8;
+keyboard_pocket_depth = 8.6;
+keyboard_clearance_depth = 10.8;
+keyboard_top_z = keyboard_mount_z + 8.8;
 
 hinge_x = 88;
 hinge_axis_z = lower_h + 3.8;
@@ -44,9 +48,9 @@ hinge_barrel_d = 8.2;
 hinge_barrel_len = 30;
 hinge_block_lower = [34, 20, 14];
 hinge_block_upper = [32, 17, 9];
-keyboard_boss_h = lower_h - 4.2 - floor_t + 0.4;
+keyboard_boss_h = keyboard_mount_z + 1.0 - floor_t + 0.2;
 battery_bay = [108, 52, 13];
-controller_bay = [22, 18, 4.5];
+controller_bay = [34, 18.5, 5.0];
 usb_c_breakout = [20.4, 14.2, 5.0];
 pd_breakout = [29.1, 20.3, 10.1];
 usb_a_board = [24, 18, 6];
@@ -151,17 +155,17 @@ module lower_inner_void() {
 module keyboard_pocket(side="left") {
   sx = side == "left" ? -66 : 66;
   rot = side == "left" ? -keyboard_splay : keyboard_splay;
-  translate([sx,84,lower_h-4.2])
+  translate([sx,84,lower_h-keyboard_pocket_depth])
     rotate([0,0,rot])
-      rounded_box([110,82,5], r=5);
+      rounded_box([116,90,keyboard_pocket_depth+1], r=5);
 }
 
 module keyboard_clearance_cut(side="left") {
   sx = side == "left" ? -66 : 66;
   rot = side == "left" ? -keyboard_splay : keyboard_splay;
-  translate([sx,84,lower_h-9.0])
+  translate([sx,84,lower_h-keyboard_clearance_depth])
     rotate([0,0,rot])
-      rounded_box([100,72,7], r=4);
+      rounded_box([110,86,keyboard_clearance_depth-1.2], r=4);
 }
 
 module lower_port_cuts() {
@@ -427,7 +431,7 @@ module keyboard_plate(side="left") {
   rot = side == "left" ? -keyboard_splay : keyboard_splay;
   mirror_side = side == "left" ? 1 : -1;
   difference() {
-    rounded_box([112,84,1.6], r=5);
+    rounded_box([112,88,1.6], r=5);
     for (k=left_keys)
       translate([k[0]*mirror_side,k[1],-eps])
         rounded_box([14.2,14.2,2.2], r=1.0);
@@ -439,7 +443,7 @@ module keyboard_plate(side="left") {
 module keyboard_pcb(side="left") {
   mirror_side = side == "left" ? 1 : -1;
   difference() {
-    rounded_box([104,76,pcb_t], r=4);
+    rounded_box([108,86,pcb_t], r=4);
     for (k=left_keys)
       translate([k[0]*mirror_side,k[1],-eps])
         rounded_box([13.8,13.8,pcb_t+0.2], r=1.0);
@@ -450,7 +454,7 @@ module choc_switches(side="left") {
   mirror_side = side == "left" ? 1 : -1;
   for (k=left_keys)
     translate([k[0]*mirror_side,k[1],plate_t])
-      rounded_box([14.1,14.1,3.2], r=0.8);
+      rounded_box([14.1,14.1,1.5], r=0.8);
 }
 
 module keycap_set(side="left") {
@@ -480,13 +484,13 @@ module simulated_battery() {
 
 module simulated_controller() {
   color("#1f4d3a")
-    translate([-104,52,floor_t+8])
+    translate([-102,52,floor_t+7.6])
       rounded_box(controller_bay, r=2);
   color("#101112")
-    translate([-104,42,floor_t+10])
-      rounded_box([12,5,3], r=1);
+    translate([-102,42,floor_t+10])
+      rounded_box([13,5,3], r=1);
   color("#d3c49b")
-    for (x=[-119,-112,-96,-89])
+    for (x=[-116,-108,-100,-92,-88])
       translate([x,57,floor_t+11])
         rounded_box([4,4,1.5], r=0.5);
 }
@@ -527,7 +531,7 @@ module hinge_hardware_visual() {
 module keyboard_visual(side="left", include_keycaps=true) {
   sx = side == "left" ? -66 : 66;
   rot = side == "left" ? -keyboard_splay : keyboard_splay;
-  translate([sx,84,lower_h-6.4])
+  translate([sx,84,keyboard_mount_z])
     rotate([0,0,rot]) {
       color("#1f4d3a") translate([0,0,-1.8]) keyboard_pcb(side);
       color("#2a2a28") choc_switches(side);
@@ -537,27 +541,45 @@ module keyboard_visual(side="left", include_keycaps=true) {
     }
 }
 
-module shell_visual() {
+module lower_assembly_visual() {
   color("#b9b6ad") lower_part("left");
   color("#b9b6ad") lower_part("right");
   color("#8d8a82") translate([0,0,-4]) lower_center_spine();
   color("#222222") translate([0,0,-5]) bottom_cover();
+}
 
+module lid_shell_at(angle=122) {
   translate([0,hinge_axis_y,hinge_axis_z])
-    rotate([122,0,0])
+    rotate([angle,0,0])
       translate([0,upper_h/2+1,-7.2]) {
         color("#b9b6ad") lid_frame();
         color("#777777") translate([0,0,-3.2]) lid_back();
       }
 }
 
-module tablet_assembly_visual() {
+module tablet_at(angle=122) {
   translate([0,hinge_axis_y,hinge_axis_z])
-    rotate([122,0,0])
+    rotate([angle,0,0])
       translate([0,upper_h/2+1,-7.2]) {
         tablet_visual();
         tablet_brackets_visual();
       }
+}
+
+module shell_visual() {
+  lower_assembly_visual();
+  lid_shell_at(122);
+}
+
+module tablet_assembly_visual() {
+  tablet_at(122);
+}
+
+module closed_lid_envelope_visual() {
+  translate([0,88,lower_h+0.4]) {
+    color("#b9b6ad") rounded_box([upper_w, upper_h, upper_t], r=9);
+    color("#777777") translate([0,0,upper_t-0.2]) rounded_box([upper_w-8, upper_h-8, 1.2], r=8);
+  }
 }
 
 module keycaps_assembly_visual() {
@@ -612,7 +634,14 @@ module assembly_preview() {
   keycaps_assembly_visual();
 }
 
+module closed_preview() {
+  lower_assembly_visual();
+  closed_lid_envelope_visual();
+  hinge_hardware_visual();
+}
+
 if (selected_part == "assembly_preview") assembly_preview();
+else if (selected_part == "closed_preview") closed_preview();
 else if (selected_part == "lower_left") lower_part("left");
 else if (selected_part == "lower_right") lower_part("right");
 else if (selected_part == "lower_center_spine") lower_center_spine();

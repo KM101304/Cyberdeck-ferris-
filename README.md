@@ -31,7 +31,9 @@ docs/BOM.md                  Hardware, fasteners, and electronics
 docs/ASSEMBLY.md             Build sequence and validation checks
 docs/AUDIT.md                Engineering audit and remaining prototype checks
 docs/PARTS_LOCK.md           Real selected parts and mechanical envelopes
+docs/WIRING.md               Keyboard, power, and USB wiring plan
 hardware/keyboard/Sweep/     Vendored Sweep v2.2 PCB source and gerbers
+hardware/keyboard/fielddeck_sweep_compat/ FieldDeck-specific keyboard PCB placement and wiring files
 ```
 
 ## Printable Parts
@@ -70,7 +72,7 @@ The GitHub Pages viewer has an `Internals` mode that makes the shell transparent
 
 ## Real Parts Locked
 
-This revision is built around a Samsung Galaxy Tab A9+ Wi-Fi tablet and a Sweep v2.2 Choc PCB. See [docs/PARTS_LOCK.md](docs/PARTS_LOCK.md) for selected parts, dimensions, and source links.
+This revision is built around a Samsung Galaxy Tab A9+ Wi-Fi tablet, Sweep v2.2 Choc PCB geometry, and Pro Micro-footprint USB-C RP2040 controllers. See [docs/PARTS_LOCK.md](docs/PARTS_LOCK.md) for selected parts, dimensions, and source links.
 
 ## Export STLs
 
@@ -111,6 +113,7 @@ Open these files:
 | Display/rear isometric | [exports/preview/fielddeck_open_iso.png](exports/preview/fielddeck_open_iso.png) |
 | Display/rear front | [exports/preview/fielddeck_open_front.png](exports/preview/fielddeck_open_front.png) |
 | Side profile | [exports/preview/fielddeck_open_side.png](exports/preview/fielddeck_open_side.png) |
+| Closed clearance | [exports/preview/fielddeck_closed_iso.png](exports/preview/fielddeck_closed_iso.png) |
 
 ## Print First
 

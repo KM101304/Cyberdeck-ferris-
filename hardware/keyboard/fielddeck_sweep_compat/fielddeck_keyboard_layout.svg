@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="420" viewBox="-205 -105 410 210">
+  <style>
+    .board{fill:#173b2d;stroke:#d7d1c3;stroke-width:1.2}
+    .plate{fill:none;stroke:#f2ead7;stroke-width:0.9;stroke-dasharray:3 2}
+    .key{fill:#e8dfcc;stroke:#4a4942;stroke-width:0.7}
+    .mount{fill:none;stroke:#f2ead7;stroke-width:1.1}
+    .label{font:5px monospace;fill:#f2ead7;text-anchor:middle}
+    .small{font:4px monospace;fill:#f2ead7;text-anchor:middle}
+  </style>
+  <g transform="translate(-66,0) rotate(-11)">
+    <rect class="board" x="-54" y="-43" width="108" height="86" rx="4"/>
+    <rect class="plate" x="-56" y="-44" width="112" height="88" rx="5"/>
+    <rect class="key" x="-43.6" y="12.7" width="15.2" height="14.6" rx="1.6"/><text class="small" x="-36" y="21.5">L01</text>
+    <rect class="key" x="-25.6" y="7.7" width="15.2" height="14.6" rx="1.6"/><text class="small" x="-18" y="16.5">L02</text>
+    <rect class="key" x="-7.6" y="3.7" width="15.2" height="14.6" rx="1.6"/><text class="small" x="0" y="12.5">L03</text>
+    <rect class="key" x="10.4" y="7.7" width="15.2" height="14.6" rx="1.6"/><text class="small" x="18" y="16.5">L04</text>
+    <rect class="key" x="28.4" y="12.7" width="15.2" height="14.6" rx="1.6"/><text class="small" x="36" y="21.5">L05</text>
+    <rect class="key" x="-43.6" y="-4.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="-36" y="4.5">L06</text>
+    <rect class="key" x="-25.6" y="-9.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="-18" y="-0.5">L07</text>
+    <rect class="key" x="-7.6" y="-13.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="0" y="-4.5">L08</text>
+    <rect class="key" x="10.4" y="-9.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="18" y="-0.5">L09</text>
+    <rect class="key" x="28.4" y="-4.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="36" y="4.5">L10</text>
+    <rect class="key" x="-43.6" y="-21.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="-36" y="-12.5">L11</text>
+    <rect class="key" x="-25.6" y="-26.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="-18" y="-17.5">L12</text>
+    <rect class="key" x="-7.6" y="-30.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="0" y="-21.5">L13</text>
+    <rect class="key" x="10.4" y="-26.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="18" y="-17.5">L14</text>
+    <rect class="key" x="28.4" y="-21.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="36" y="-12.5">L15</text>
+    <rect class="key" x="10.4" y="-49.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="18" y="-40.5">L16</text>
+    <rect class="key" x="31.4" y="-43.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="39" y="-34.5">L17</text>
+    <circle class="mount" cx="-46" cy="-32" r="2.5"/><circle class="mount" cx="46" cy="-32" r="2.5"/><circle class="mount" cx="-46" cy="32" r="2.5"/><circle class="mount" cx="46" cy="32" r="2.5"/>
+    <rect class="plate" x="-17" y="48" width="34" height="18.5" rx="2"/><text class="label" x="0" y="59">USB-C Pro Micro</text>
+  </g>
+  <g transform="translate(66,0) rotate(11)">
+    <rect class="board" x="-54" y="-43" width="108" height="86" rx="4"/>
+    <rect class="plate" x="-56" y="-44" width="112" height="88" rx="5"/>
+    <rect class="key" x="28.4" y="12.7" width="15.2" height="14.6" rx="1.6"/><text class="small" x="36" y="21.5">R01</text>
+    <rect class="key" x="10.4" y="7.7" width="15.2" height="14.6" rx="1.6"/><text class="small" x="18" y="16.5">R02</text>
+    <rect class="key" x="-7.6" y="3.7" width="15.2" height="14.6" rx="1.6"/><text class="small" x="0" y="12.5">R03</text>
+    <rect class="key" x="-25.6" y="7.7" width="15.2" height="14.6" rx="1.6"/><text class="small" x="-18" y="16.5">R04</text>
+    <rect class="key" x="-43.6" y="12.7" width="15.2" height="14.6" rx="1.6"/><text class="small" x="-36" y="21.5">R05</text>
+    <rect class="key" x="28.4" y="-4.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="36" y="4.5">R06</text>
+    <rect class="key" x="10.4" y="-9.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="18" y="-0.5">R07</text>
+    <rect class="key" x="-7.6" y="-13.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="0" y="-4.5">R08</text>
+    <rect class="key" x="-25.6" y="-9.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="-18" y="-0.5">R09</text>
+    <rect class="key" x="-43.6" y="-4.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="-36" y="4.5">R10</text>
+    <rect class="key" x="28.4" y="-21.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="36" y="-12.5">R11</text>
+    <rect class="key" x="10.4" y="-26.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="18" y="-17.5">R12</text>
+    <rect class="key" x="-7.6" y="-30.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="0" y="-21.5">R13</text>
+    <rect class="key" x="-25.6" y="-26.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="-18" y="-17.5">R14</text>
+    <rect class="key" x="-43.6" y="-21.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="-36" y="-12.5">R15</text>
+    <rect class="key" x="-25.6" y="-49.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="-18" y="-40.5">R16</text>
+    <rect class="key" x="-46.6" y="-43.3" width="15.2" height="14.6" rx="1.6"/><text class="small" x="-39" y="-34.5">R17</text>
+    <circle class="mount" cx="-46" cy="-32" r="2.5"/><circle class="mount" cx="46" cy="-32" r="2.5"/><circle class="mount" cx="-46" cy="32" r="2.5"/><circle class="mount" cx="46" cy="32" r="2.5"/>
+    <rect class="plate" x="-17" y="48" width="34" height="18.5" rx="2"/><text class="label" x="0" y="59">USB-C Pro Micro</text>
+  </g>
+  <path d="M -30 58 C -10 78, 10 78, 30 58" fill="none" stroke="#f2ead7" stroke-width="1.2"/>
+  <text class="label" x="0" y="86">Internal JST-SH-4: GND / 3V3 / SERIAL / RESET</text>
+</svg>

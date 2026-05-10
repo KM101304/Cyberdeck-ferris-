@@ -1,0 +1,5 @@
+connector,pin,signal,wire_color,recommended_use
+JST-SH-4,1,GND,black,common ground
+JST-SH-4,2,3V3,red,right half power
+JST-SH-4,3,SERIAL,yellow,QMK split serial data
+JST-SH-4,4,RESET,white,optional remote reset or no-connect

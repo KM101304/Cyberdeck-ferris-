@@ -40,15 +40,27 @@ hardware/keyboard/Sweep/Sweep v2.2/sweepv2.2_gerber.zip
 
 Use `sweepv2.2_gerber.zip` for PCB ordering. Use the printed shell trays as the mechanical carrier, not the original open keyboard case.
 
+FieldDeck-specific keyboard files:
+
+```text
+hardware/keyboard/fielddeck_sweep_compat/
+```
+
+This folder defines switch coordinates, direct-pin netlist, internal JST interconnect pinout, and the mechanical PCB envelope used by the shell.
+
 ## Controller
 
-**Chosen part:** Seeed Studio XIAO RP2040.
+**Chosen part:** SparkFun Pro Micro RP2040 or pin-compatible USB-C Pro Micro RP2040 controller.
+
+Source: SparkFun lists the Pro Micro RP2040 with USB-C, Pro Micro footprint, 20 multifunction GPIO pins, and 1.3 x 0.7 in dimensions.
 
 | Parameter | Value |
 |---|---:|
-| Board envelope used in CAD | 22 x 18 x 4.5 mm |
+| Board envelope used in CAD | 34 x 18.5 x 5.0 mm |
 | USB | USB-C |
-| Role | Wired keyboard controller |
+| Role | Split keyboard controller |
+
+Reason: Pro Micro-footprint controllers match the existing Sweep v2.2 PCB and have enough GPIO for a direct-pin 17-key half. XIAO RP2040 is rejected for this revision because it would require an I/O expander or a matrix redesign.
 
 ## USB / Power Boards
 

@@ -46,14 +46,15 @@
 | Kailh Choc v1 switches | 34 |
 | Choc keycaps | 34 |
 | Sweep v2.2 low-profile PCB pair | 1 |
-| Seeed Studio XIAO RP2040 | 2 |
-| JST-SH 4-pin cable | 1 |
+| SparkFun Pro Micro RP2040 or pin-compatible USB-C Pro Micro RP2040 controller | 2 |
+| JST-SH 4-pin cable, 150-180 mm | 1 |
 | Short right-angle USB-C cable | 1 |
 | Slim protected USB-C PD power bank/module, max 108 x 52 x 10.5 mm preferred | 1 |
 | Adafruit USB Type-C Breakout 4090 | 1 |
 | Adafruit HUSB238 USB-C PD Switchable Breakout 5991 | 1 |
 | USB-A panel/breakout board, max 24 x 18 x 6 mm | 1 |
 | 26-28 AWG silicone wire | as needed |
+| Low-profile machine-pin sockets for Pro Micro controllers | 2 sets |
 | 1 mm EVA/Poron/TPU pad sheet | 1 |
 
 ## Simulated In CAD

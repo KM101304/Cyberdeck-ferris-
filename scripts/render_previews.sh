@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUT_DIR="$ROOT_DIR/exports/preview"
 SCAD="$ROOT_DIR/scad/parts/assembly_preview.scad"
+CLOSED_SCAD="$ROOT_DIR/scad/parts/closed_preview.scad"
 
 mkdir -p "$OUT_DIR"
 
@@ -41,5 +42,10 @@ fi
   --imgsize=1800,1000 \
   --camera=210,58,62,70,0,18,1250 \
   "$SCAD"
+
+"${runner[@]}" -o "$OUT_DIR/fielddeck_closed_iso.png" \
+  --imgsize=1800,1000 \
+  --camera=0,65,64,64,0,205,1050 \
+  "$CLOSED_SCAD"
 
 echo "Preview images written to $OUT_DIR"
